@@ -3,7 +3,6 @@
 
 # In[113]:
 
-
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LinearRegression
@@ -16,18 +15,18 @@ import sys
 import pickle
 import os
 
+a = sys.stdin.read()
+if a==" ":
+    sys.exit()
 
-# In[114]:
+# print("input is  : ", a)
 
-
-data_path = sys.stdin(0)
-model_path = sys.stdin(1)
-
+# data_path,model_path = a.split()
 
 # In[115]:
 
-
-df = pd.read_csv("Data/HistoricalQuotes.csv",thousands=',')
+# print("Inside python file\n")
+df = pd.read_csv(data_path,thousands=',')
 
 
 # In[116]:
@@ -88,42 +87,17 @@ error_rmse = mean_squared_error(pred,y_test)
 accuracy = r2_score(pred,y_test)*100
 
 
-# In[125]:
 
+print("error rmse:",error_rmse,"error mae:",error_mae,"R2 scrore accuracy: ",accuracy)
 
-print(error_rmse,error_mae,accuracy)
-
-
-# In[126]:
-
-
-path = "model/model.pkl"
-
-
-# In[127]:
-
+path = model_path
 
 file = open(path,'wb')
 pickle.dump(linear_reg,file)
-
-
-# In[128]:
-
-
-print(path)
-
-
-# In[129]:
-
-
-print(os.path.realpath("model/model.pkl"))
-
-
-# In[130]:
-
+file.close()
 
 try :
-    sys.stdout(path)
+    sys.stdout.write(model_path)
 except Exception as e:
     print("path not returned as ",e)
 
